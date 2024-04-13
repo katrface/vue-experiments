@@ -1,11 +1,6 @@
 import { deepClone, delay } from '@/shared/lib'
 import type { Todo, TodoCreateDto } from './types'
 
-export const TODOS_TOKENS = {
-  fetchTodos: '/api/todos',
-  fetchTodoDetails: '/api/todos/details'
-}
-
 const TODOS: Todo[] = [
   {
     id: 1,
