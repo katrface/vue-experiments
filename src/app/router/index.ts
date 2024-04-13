@@ -25,7 +25,7 @@ const router = createRouter({
         {
           path: ':id(\\d+)',
           name: 'todo-list-details',
-          props: ({params}) => ({id: Number.parseInt(params.id as string)}),
+          props: ({ params }) => ({ id: Number.parseInt(params.id as string) }),
           component: () => import('@/pages/TodoDetails/TodoDetails.vue')
         },
         {

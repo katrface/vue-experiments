@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useTodo } from '@/entities/todo/model/useTodo';
-import { useTodoUpdate } from '@/entities/todo/model/useTodoUpdate';
-import TodoForm from './TodoForm.vue';
+import { useTodo } from '@/entities/todo/model/useTodo'
+import { useTodoUpdate } from '@/entities/todo/model/useTodoUpdate'
+import TodoForm from './TodoForm.vue'
+import type { Todo, TodoCreateDto } from '@/shared/api/todos/types'
 
 interface Props {
   id: number
@@ -12,21 +13,19 @@ const emits = defineEmits<{
   updated: []
 }>()
 
-const { data: initialTodo, isFetching, isFetched } = useTodo(props.id)
+const { data: todo, isFetching, isFetched } = useTodo(props.id)
 
-const { updatingTodo, isPending, updateTodo } = useTodoUpdate(initialTodo)
+const { isPending, updateTodo } = useTodoUpdate()
 
-const update = async () => {
-  await updateTodo()
+const update = async (updatingTodo: TodoCreateDto) => {
+  await updateTodo(updatingTodo as Todo)
   emits('updated')
 }
-
 </script>
 
 <template>
   <TodoForm
-    v-model:mutating-todo="updatingTodo"
-    :initial-todo="initialTodo"
+    v-model:todo="todo"
     :loading="isFetching"
     :disabled="!isFetched"
     :submitting="isPending"

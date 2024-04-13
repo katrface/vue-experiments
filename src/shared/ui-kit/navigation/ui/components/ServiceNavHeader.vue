@@ -5,7 +5,7 @@ interface Props {
   service: ServiceNavItem
   isCompact: boolean
 }
-defineProps<Props>();
+defineProps<Props>()
 </script>
 
 <template>
@@ -26,7 +26,7 @@ defineProps<Props>();
             color="blue"
             size="small"
             class="ml-1"
-            style="min-width: 32px; min-height: 32px;"
+            style="min-width: 32px; min-height: 32px"
           >
             <v-icon
               color="white"

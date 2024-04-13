@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { TodoFormCreate, TodoFormUpdate } from '@/widgets/todo-form';
-import { useRouter } from 'vue-router';
+import { TodoFormCreate, TodoFormUpdate } from '@/widgets/todo-form'
+import { useRouter } from 'vue-router'
 
 interface Props {
   id?: number
@@ -13,7 +13,6 @@ const router = useRouter()
 const submitted = async () => {
   router.push({ name: 'todo-list' })
 }
-
 </script>
 
 <template>

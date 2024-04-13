@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import NavAccountCard from './NavAccountCard.vue'
 
 const ACCOUNT = {
@@ -10,7 +10,7 @@ const ACCOUNT = {
 }
 
 defineProps({
-  isCompact: Boolean,
+  isCompact: Boolean
 })
 const isMenuOpened = ref(false)
 </script>

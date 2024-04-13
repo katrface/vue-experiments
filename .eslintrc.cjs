@@ -3,12 +3,13 @@ require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
+  plugins: ['sonarjs'],
   extends: [
     '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier/skip-formatting',
-    'eslint:recommended',
     'plugin:vue/vue3-recommended',
-    'plugin:vuetify/base'
+    'plugin:vuetify/base',
+    'eslint:recommended',
+    'plugin:sonarjs/recommended'
   ],
   overrides: [
     {
@@ -20,5 +21,9 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser'
+  },
+  rules: {
+    'no-console': 'warn',
+    'no-debugger': 'warn'
   }
 }

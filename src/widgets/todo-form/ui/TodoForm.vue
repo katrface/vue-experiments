@@ -1,28 +1,34 @@
 <script setup lang="ts">
-import type { Todo } from '@/shared/api/todos/types';
+import type { TodoCreateDto } from '@/shared/api/todos/types'
+import { useTodoForm } from '../model/useTodoForm'
+import { computed } from 'vue'
 
 interface Props {
-  initialTodo: Todo
   submitting: boolean
   loading?: boolean
   disabled?: boolean
   btnText: string
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   loading: false,
-  disabled: false,
+  disabled: false
 })
 const emits = defineEmits<{
-  submit: []
+  submit: [todo: TodoCreateDto]
 }>()
 
-const mutatingTodo = defineModel<Todo>('mutatingTodo', { required: true })
+const todo = defineModel<TodoCreateDto>('todo', { required: true })
 
-const submit = async () => {
-  emits('submit')
-}
+const { titleField, descriptionField, form } = useTodoForm(todo)
 
+const submit = form.handleSubmit((todo) => {
+  emits('submit', todo)
+})
+
+const disabledSubmitBtn = computed(
+  () => props.disabled || !form.meta.value.valid || !form.meta.value.dirty
+)
 </script>
 
 <template>
@@ -31,14 +37,16 @@ const submit = async () => {
     @submit.prevent
   >
     <v-text-field
-      v-model="mutatingTodo.title"
+      v-model="titleField.value.value"
+      :error-messages="titleField.errorMessage.value"
       :loading="loading"
       :disabled="disabled"
       label="Title"
     />
 
     <v-text-field
-      v-model="mutatingTodo.description"
+      v-model="descriptionField.value.value"
+      :error-messages="descriptionField.errorMessage.value"
       :loading="loading"
       :disabled="disabled"
       label="Description"
@@ -46,7 +54,7 @@ const submit = async () => {
 
     <v-btn
       :loading="submitting"
-      :disabled="disabled"
+      :disabled="disabledSubmitBtn"
       class="mt-2"
       type="submit"
       block

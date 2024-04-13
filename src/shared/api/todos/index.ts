@@ -9,17 +9,17 @@ export const TODOS_TOKENS = {
 const TODOS: Todo[] = [
   {
     id: 1,
-    title: 'Frozen Yogurt',
+    title: 'Frozen 1',
     description: 'foo'
   },
   {
     id: 2,
-    title: 'Frozen Yogurt',
+    title: 'Frozen 2',
     description: 'foo'
   },
   {
     id: 3,
-    title: 'Frozen Yogurt',
+    title: 'Frozen 3',
     description: 'foo'
   }
 ]

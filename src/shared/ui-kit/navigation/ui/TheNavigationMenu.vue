@@ -9,16 +9,16 @@ import type { ServiceNavItem, ServiceSubnavItem } from '../types'
 import { computed, ref } from 'vue'
 
 interface Props {
-  currentService: ServiceNavItem;
-  services: ServiceNavItem[];
-  supportNavItem: ServiceSubnavItem;
+  currentService: ServiceNavItem
+  services: ServiceNavItem[]
+  supportNavItem: ServiceSubnavItem
 }
 
 const props = defineProps<Props>()
 
 const isCompact = ref(false)
 
-const subnavItems = computed<ServiceSubnavItem[]>(() => props.currentService.subnav ?? []);
+const subnavItems = computed<ServiceSubnavItem[]>(() => props.currentService.subnav ?? [])
 </script>
 
 <template>

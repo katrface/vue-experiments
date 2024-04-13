@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AllServicePanel from './AllServicePanel.vue'
 import { useSubnavStore } from '../stores/navigation'
-import type { ServiceNavItem } from '../types';
+import type { ServiceNavItem } from '../types'
 
 interface Props {
   services: ServiceNavItem[]

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useTodoDelete } from '../model/useTodoDelete';
+import { useTodoDelete } from '../model/useTodoDelete'
 
 interface Props {
   id: number
 }
 
 defineProps<Props>()
-const { isPending, deleteTodoById } = useTodoDelete();
+const { isPending, deleteTodoById } = useTodoDelete()
 </script>
 <template>
   <v-btn

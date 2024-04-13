@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { ServiceNavItem } from '../../types';
-
+import type { ServiceNavItem } from '../../types'
 
 interface Props {
   service: ServiceNavItem
@@ -39,7 +38,7 @@ defineProps<Props>()
           <template #subtitle>
             <div
               class="mt-3"
-              style="white-space: normal;"
+              style="white-space: normal"
             >
               {{ service.description }}
             </div>

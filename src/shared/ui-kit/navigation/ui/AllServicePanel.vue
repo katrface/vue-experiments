@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ServiceCard from './components/ServiceCard.vue'
-import type { ServiceNavItem } from '../types';
+import type { ServiceNavItem } from '../types'
 
 interface Props {
   services: ServiceNavItem[]

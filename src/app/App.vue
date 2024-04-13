@@ -2,16 +2,20 @@
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 import { RouterView, useRoute } from 'vue-router'
 import { services, SUPPORT } from '@/app/config'
-import { TheNavigationMenu, DEFAULT_NAV_ITEM, type ServiceNavItem } from '@/shared/ui-kit/navigation'
+import {
+  DEFAULT_NAV_ITEM,
+  type ServiceNavItem,
+  TheNavigationMenu
+} from '@/shared/ui-kit/navigation'
 import { NavAccount } from '@/widgets/profile'
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-const route = useRoute();
+const route = useRoute()
 
 const currentService = computed<ServiceNavItem>(() => {
-  const routeName = route.name as string ?? ''
-  return services.find(serv => routeName.startsWith(serv.name)) ?? DEFAULT_NAV_ITEM
-});
+  const routeName = (route.name as string) ?? ''
+  return services.find((serv) => routeName.startsWith(serv.name)) ?? DEFAULT_NAV_ITEM
+})
 
 const isDevMode = import.meta.env.DEV
 </script>

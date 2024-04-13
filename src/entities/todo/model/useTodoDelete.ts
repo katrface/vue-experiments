@@ -16,7 +16,7 @@ export function useTodoDelete() {
 
       queryClient.invalidateQueries({ queryKey: [TODOS_TOKENS.fetchTodos] })
       queryClient.removeQueries({ queryKey: [TODOS_TOKENS.fetchTodoDetails, id] })
-    },
+    }
   })
 
   return { ...mutation, deleteTodoById: mutation.mutate }

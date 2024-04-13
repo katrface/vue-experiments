@@ -15,7 +15,7 @@ import router from './router'
 const vuetify = createVuetify({
   theme: {
     defaultTheme: 'dark'
-  },
+  }
 })
 
 const vueQueryPluginOptions: VueQueryPluginOptions = {

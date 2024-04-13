@@ -7,11 +7,10 @@ interface Props {
 
 const subnav = useSubnavStore()
 
-defineProps<Props>();
+defineProps<Props>()
 
 const onClick = () => {
   subnav.changeDrawer()
-
 }
 </script>
 
