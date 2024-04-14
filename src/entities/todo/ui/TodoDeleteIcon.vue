@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTodoDelete } from '../model/useTodoDelete'
+import { useTodoDelete } from '../model'
 
 interface Props {
   id: number

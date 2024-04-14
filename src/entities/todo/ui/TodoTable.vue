@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTodoList } from '../model/useTodoList'
+import { useTodoList } from '../model'
 import { headers } from '../config'
 import { useRouter } from 'vue-router'
 import TodoDeleteIcon from './TodoDeleteIcon.vue'

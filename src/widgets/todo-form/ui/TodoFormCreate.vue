@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TodoForm from './TodoForm.vue'
-import { useTodoCreate } from '@/entities/todo/model/useTodoCreate'
+import { useTodoCreate } from '@/entities/todo'
 import type { TodoCreateDto } from '@/shared/api/todos/types'
 
 const emits = defineEmits<{

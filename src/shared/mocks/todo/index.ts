@@ -68,7 +68,7 @@ export const handlers = [
       throwNotFound()
     }
 
-    Object.assign(todo, updatedTodo)
+    Object.assign(todo!, updatedTodo)
 
     return HttpResponse.json(todo)
   }),
@@ -82,7 +82,7 @@ export const handlers = [
       throwNotFound()
     }
 
-    TODOS.splice(TODOS.indexOf(todo), 1)
+    TODOS.splice(TODOS.indexOf(todo!), 1)
 
     return HttpResponse.json(TODOS)
   })

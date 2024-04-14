@@ -31,19 +31,8 @@ const vueQueryPluginOptions: VueQueryPluginOptions = {
 
 async function prepareApp() {
   if (import.meta.env.DEV) {
-    const { worker } = await import('../shared/mocks/browser.js')
-    return worker.start({
-      onUnhandledRequest(request, print) {
-        // Ignore any requests containing "cdn.com" in their URL.
-        const url = new URL(request.url)
-        if (!url.pathname.startsWith('/api')) {
-          return
-        }
-        
-        // Otherwise, print an unhandled request warning.
-        print.warning()
-      },
-    })
+    const { startWorker } = await import('../shared/mocks/browser.js')
+    return startWorker()
   }
 
   return Promise.resolve()

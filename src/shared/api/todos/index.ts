@@ -6,10 +6,11 @@ export async function fetchTodos() {
   try {
     const response = await fetch('/api/todos')
 
-    if (response.ok) {
-      return await response.json() as Todo[]
+    if (!response.ok) {
+      throw Error()
     }
-    return []
+    return await response.json() as Todo[]
+    
   } catch (error) {
     console.error("🚀 ~ fetchTodos ~ error:", error)
     throw error
@@ -26,9 +27,11 @@ export async function createTodo(creatingTodo: TodoCreateDto) {
       body: JSON.stringify(creatingTodo)
     })
 
-    if (response.ok) {
-      return await response.json() as Todo
+    if (!response.ok) {
+      throw Error()
     }
+    return await response.json() as Todo
+    
   } catch (error) {
     console.error("🚀 ~ createTodo ~ error:", error)
     throw error
@@ -39,9 +42,11 @@ export async function fetchTodoById(id: number) {
   try {
     const response = await fetch(`/api/todos/${id}`)
 
-    if (response.ok) {
-      return await response.json() as Todo
+    if (!response.ok) {
+      throw Error()
     }
+    return await response.json() as Todo
+
   } catch (error) {
     console.error("🚀 ~ fetchTodoById ~ error:", error)
     throw error
@@ -58,9 +63,11 @@ export async function updateTodo(updatingTodo: Todo) {
       body: JSON.stringify(updatingTodo)
     })
 
-    if (response.ok) {
-      return await response.json() as Todo
+    if (!response.ok) {
+      throw Error()
     }
+    return await response.json() as Todo
+
   } catch (error) {
     console.error("🚀 ~ updateTodo ~ error:", error)
     throw error
@@ -73,9 +80,11 @@ export async function deleteTodo(id: number) {
       method: 'DELETE'
     })
 
-    if (response.ok) {
-      return await response.json() as Todo
+    if (!response.ok) {
+      throw Error()
     }
+
+    return await response.json() as Todo
   } catch (error) {
     console.error("🚀 ~ deleteTodo ~ error:", error)
     throw error

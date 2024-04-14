@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { useTodo } from '@/entities/todo/model/useTodo'
-import { useTodoUpdate } from '@/entities/todo/model/useTodoUpdate'
+import { useTodoUpdate, useTodo } from '@/entities/todo'
 import TodoForm from './TodoForm.vue'
 import type { Todo, TodoCreateDto } from '@/shared/api/todos/types'
 
