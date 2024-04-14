@@ -46,6 +46,7 @@
     "eslint-plugin-vue": "^9.24.1",
     "eslint-plugin-vuetify": "^2.3.0",
     "jsdom": "^24.0.0",
+    "msw": "^2.2.13",
     "npm-run-all2": "^6.1.2",
     "prettier": "^3.2.5",
     "start-server-and-test": "^2.0.3",
@@ -56,5 +57,11 @@
     "vite-plugin-vuetify": "^2.0.3",
     "vitest": "^1.5.0",
     "vue-tsc": "^2.0.13"
+  },
+  "msw": {
+    "workerDirectory": [
+      "src\\app\\assets",
+      "public"
+    ]
   }
 }

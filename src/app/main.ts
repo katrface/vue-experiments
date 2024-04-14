@@ -29,11 +29,32 @@ const vueQueryPluginOptions: VueQueryPluginOptions = {
   }
 }
 
-const app = createApp(App)
+async function prepareApp() {
+  if (import.meta.env.DEV) {
+    const { worker } = await import('../shared/mocks/browser.js')
+    return worker.start({
+      onUnhandledRequest(request, print) {
+        // Ignore any requests containing "cdn.com" in their URL.
+        const url = new URL(request.url)
+        if (!url.pathname.startsWith('/api')) {
+          return
+        }
+        
+        // Otherwise, print an unhandled request warning.
+        print.warning()
+      },
+    })
+  }
 
-app.use(createPinia())
-app.use(vuetify)
-app.use(VueQueryPlugin, vueQueryPluginOptions)
-app.use(router)
+  return Promise.resolve()
+}
 
-app.mount('#app')
+prepareApp().then(() => {
+  const app = createApp(App)
+
+  app.use(createPinia())
+  app.use(vuetify)
+  app.use(VueQueryPlugin, vueQueryPluginOptions)
+  app.use(router)
+  app.mount('#app')
+})

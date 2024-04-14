@@ -1,85 +1,85 @@
-import { deepClone, delay } from '@/shared/lib'
+/* eslint-disable no-console */
 import type { Todo, TodoCreateDto } from './types'
 
-const TODOS: Todo[] = [
-  {
-    id: 1,
-    title: 'Frozen 1',
-    description: 'foo'
-  },
-  {
-    id: 2,
-    title: 'Frozen 2',
-    description: 'foo'
-  },
-  {
-    id: 3,
-    title: 'Frozen 3',
-    description: 'foo'
-  }
-]
 
 export async function fetchTodos() {
-  console.log('🚀 ~ fetchTodos ~ fetchTodos:')
+  try {
+    const response = await fetch('/api/todos')
 
-  await delay(2000)
-  return deepClone(TODOS)
+    if (response.ok) {
+      return await response.json() as Todo[]
+    }
+    return []
+  } catch (error) {
+    console.error("🚀 ~ fetchTodos ~ error:", error)
+    throw error
+  }
 }
 
 export async function createTodo(creatingTodo: TodoCreateDto) {
-  console.log('🚀 ~ createTodo:', creatingTodo)
+  try {
+    const response = await fetch('/api/todos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(creatingTodo)
+    })
 
-  await delay(2000)
-
-  const nextId = Math.max(...TODOS.map((todo) => todo.id)) + 1
-
-  Object.assign(creatingTodo, { id: nextId })
-  TODOS.push(creatingTodo as Todo)
-
-  return deepClone(creatingTodo) as Todo
+    if (response.ok) {
+      return await response.json() as Todo
+    }
+  } catch (error) {
+    console.error("🚀 ~ createTodo ~ error:", error)
+    throw error
+  }
 }
 
 export async function fetchTodoById(id: number) {
-  console.log('🚀 ~ fetchTodoById ~ id:', id)
+  try {
+    const response = await fetch(`/api/todos/${id}`)
 
-  await delay(2000)
-
-  const todo = TODOS.find((todo) => todo.id === id)
-  if (!todo) {
-    throw new Error('404')
+    if (response.ok) {
+      return await response.json() as Todo
+    }
+  } catch (error) {
+    console.error("🚀 ~ fetchTodoById ~ error:", error)
+    throw error
   }
-
-  return deepClone(todo)
 }
 
 export async function updateTodo(updatingTodo: Todo) {
-  console.log('🚀 ~ updateTodo:', updatingTodo)
+  try {
+    const response = await fetch(`/api/todos/${updatingTodo.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(updatingTodo)
+    })
 
-  await delay(2000)
-
-  const todo = TODOS.find((todo) => todo.id === updatingTodo.id)
-  if (!todo) {
-    throw new Error('404')
+    if (response.ok) {
+      return await response.json() as Todo
+    }
+  } catch (error) {
+    console.error("🚀 ~ updateTodo ~ error:", error)
+    throw error
   }
-
-  Object.assign(todo, updatingTodo)
-  return deepClone(todo)
 }
 
 export async function deleteTodo(id: number) {
-  console.log('🚀 ~ deleteTodo:', id)
+  try {
+    const response = await fetch(`/api/todos/${id}`, {
+      method: 'DELETE'
+    })
 
-  await delay(2000)
-
-  const todo = TODOS.find((todo) => todo.id === id)
-
-  if (!todo) {
-    throw new Error('404')
+    if (response.ok) {
+      return await response.json() as Todo
+    }
+  } catch (error) {
+    console.error("🚀 ~ deleteTodo ~ error:", error)
+    throw error
   }
-
-  TODOS.splice(TODOS.indexOf(todo), 1)
-
-  return deepClone(todo)
 }
 
 export default {
