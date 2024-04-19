@@ -1,10 +1,9 @@
-import api from '@/shared/api/todos'
 import { useQuery } from '@tanstack/vue-query'
-import { todoKeys } from '../queries'
+import { todoKeys, fetchTodos } from '@/shared/api/todos'
 
 export function useTodoList() {
   return useQuery({
     queryKey: todoKeys.lists(),
-    queryFn: () => api.fetchTodos()
+    queryFn: () => fetchTodos()
   })
 }

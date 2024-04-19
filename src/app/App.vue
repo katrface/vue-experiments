@@ -32,7 +32,7 @@ const isDevMode = import.meta.env.DEV
           <NavAccount :is-compact="isCompact" />
         </template>
       </TheNavigationMenu>
-      <v-main>
+      <v-main class="overflow-auto main">
         <RouterView />
       </v-main>
     </v-layout>
@@ -40,4 +40,9 @@ const isDevMode = import.meta.env.DEV
   <VueQueryDevtools v-if="isDevMode" />
 </template>
 
-<style scoped></style>
+<style scoped>
+.main {
+  height: 100vh;
+  widows: 600px;
+}
+</style>

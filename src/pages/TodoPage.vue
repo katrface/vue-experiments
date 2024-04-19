@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TodoTable } from '@/entities/todo'
+import { TodoTable } from '@/widgets/todo-table'
 </script>
 
 <template>

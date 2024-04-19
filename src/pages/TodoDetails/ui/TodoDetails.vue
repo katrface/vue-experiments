@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { TodoFormCreate, TodoFormUpdate } from '@/widgets/todo-form'
+import { TodoFormCreate } from '@/features/todo/create';
+import { TodoFormUpdate } from '@/features/todo/update'
+
 import { useRouter } from 'vue-router'
 
 interface Props {

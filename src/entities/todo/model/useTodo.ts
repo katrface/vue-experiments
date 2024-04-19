@@ -1,9 +1,7 @@
-import api from '@/shared/api/todos'
 import { useQuery } from '@tanstack/vue-query'
 import { type Ref, toRef } from 'vue'
-import { todoSchema } from '../config'
-import type { Todo } from '@/shared/api/todos/types'
-import { todoKeys } from '../queries'
+import { getDefaultTodo } from '../config'
+import { todoKeys, fetchTodoById } from '@/shared/api/todos'
 
 export function useTodo(id?: number | Ref<number>) {
   const todoId = toRef(id)
@@ -12,13 +10,13 @@ export function useTodo(id?: number | Ref<number>) {
     if (!todoId.value) {
       throw new Error()
     }
-    return api.fetchTodoById(todoId.value)
+    return fetchTodoById(todoId.value)
   }
 
   return useQuery({
     queryKey: todoKeys.detail(todoId.value!),
     queryFn: fetchTodo,
-    initialData: todoSchema.getDefault() as Todo,
+    initialData: getDefaultTodo(),
     enabled: Boolean(todoId.value)
   })
 }

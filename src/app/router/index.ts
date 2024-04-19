@@ -20,13 +20,13 @@ const router = createRouter({
         {
           path: 'create',
           name: 'todo-list-create',
-          component: () => import('@/pages/TodoDetails/TodoDetails.vue')
+          component: () => import('@/pages/TodoDetails/ui/TodoDetails.vue')
         },
         {
           path: ':id(\\d+)',
           name: 'todo-list-details',
           props: ({ params }) => ({ id: Number.parseInt(params.id as string) }),
-          component: () => import('@/pages/TodoDetails/TodoDetails.vue')
+          component: () => import('@/pages/TodoDetails')
         },
         {
           path: 'history',

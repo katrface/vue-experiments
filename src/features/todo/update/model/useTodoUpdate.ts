@@ -1,14 +1,12 @@
-import api from '@/shared/api/todos'
-import type { Todo } from '@/shared/api/todos/types'
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { todoSchema } from '../config'
-import { todoKeys } from '../queries'
+import { todoUpdateSchema } from '../config'
+import { todoKeys, updateTodo as updateTodoApi, type Todo } from '@/shared/api/todos'
 
 export function useTodoUpdate() {
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-    mutationFn: (todo: Todo) => api.updateTodo(todo),
+    mutationFn: (todo: Todo) => updateTodoApi(todo),
     onSuccess: (updatedTodo: Todo) => {
       queryClient.setQueryData<Todo>(
         todoKeys.detail(updatedTodo.id),
@@ -28,7 +26,7 @@ export function useTodoUpdate() {
   })
 
   const updateTodo = async (todo: Todo) => {
-    await todoSchema.validate(todo)
+    await todoUpdateSchema.validate(todo)
     await mutation.mutateAsync(todo)
   }
 

@@ -1,5 +1,5 @@
-import type { Todo, TodoCreateDto } from '@/shared/api/todos/types'
-import { number, object, ObjectSchema, string } from 'yup'
+import type { Todo } from '@/shared/api/todos'
+import { object, ObjectSchema, string } from 'yup'
 
 export const headers = [
   { title: 'ID', key: 'id' },
@@ -8,13 +8,19 @@ export const headers = [
   { title: 'Действия', key: 'actions', sortable: false }
 ]
 
-export const todoSchema: ObjectSchema<Todo> = object({
-  id: number().required('ID не указан').positive('ID не указан').integer().default(0),
+export const getDefaultTodo = (): Todo => ({
+  id: 0,
+  title: '',
+  description: '',
+})
+
+export type TodoForm = Pick<Todo, 'title' | 'description'>
+
+export const todoFormSchema: ObjectSchema<TodoForm> = object({
   title: string()
     .required('Обязательное поле')
     .min(4, 'Заголовок должен содержать более 3 символов')
     .default(''),
-  description: string().default('')
+  description: string()
+    .default('')
 })
-
-export const todoSchemaCreate: ObjectSchema<TodoCreateDto> = todoSchema.omit(['id'])

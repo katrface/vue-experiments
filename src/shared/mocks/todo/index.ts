@@ -33,6 +33,7 @@ const TODOS: Todo[] = [
 export const handlers = [
   http.get(URLS.index, async () => {
     await delay()
+    
     return HttpResponse.json(TODOS)
   }),
 

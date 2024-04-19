@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useTodoUpdate, useTodo } from '@/entities/todo'
-import TodoForm from './TodoForm.vue'
-import type { Todo, TodoCreateDto } from '@/shared/api/todos/types'
+import { useTodo, TodoForm } from '@/entities/todo'
+import type { Todo, TodoCreateDto } from '@/shared/api/todos'
+import { useTodoUpdate } from '../model';
 
 interface Props {
   id: number

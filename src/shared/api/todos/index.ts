@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 import type { Todo, TodoCreateDto } from './types'
 
+export type { Todo, TodoCreateDto }
+export { todoKeys } from './queries'
 
 export async function fetchTodos() {
   try {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { TodoCreateDto } from '@/shared/api/todos/types'
-import { useTodoForm } from '../model/useTodoForm'
+import { useTodoForm } from '../../model'
 import { computed } from 'vue'
+import type { TodoForm } from '../../config';
 
 interface Props {
   submitting: boolean
@@ -15,10 +15,10 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false
 })
 const emits = defineEmits<{
-  submit: [todo: TodoCreateDto]
+  submit: [todo: TodoForm]
 }>()
 
-const todo = defineModel<TodoCreateDto>('todo', { required: true })
+const todo = defineModel<TodoForm>('todo', { required: true })
 
 const { titleField, descriptionField, form } = useTodoForm(todo)
 

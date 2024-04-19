@@ -1,15 +1,14 @@
-import api from '@/shared/api/todos'
-import type { Todo, TodoCreateDto } from '@/shared/api/todos/types'
+import type { Todo, TodoCreateDto } from '@/shared/api/todos'
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { todoSchemaCreate } from '../config'
-import { todoKeys } from '../queries'
+import { todoCreateSchema } from '../config'
+import { todoKeys, createTodo as createTodoApi } from '@/shared/api/todos'
 
 export function useTodoCreate() {
-  const initialTodo = todoSchemaCreate.getDefault() as TodoCreateDto
+  const initialTodo = todoCreateSchema.getDefault() as TodoCreateDto
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-    mutationFn: (todo: TodoCreateDto): Promise<Todo> => api.createTodo(todo),
+    mutationFn: (todo: TodoCreateDto): Promise<Todo> => createTodoApi(todo),
     onSuccess: (createdTodo: Todo) => {
       queryClient.setQueryData<Todo>(
         todoKeys.detail(createdTodo.id),
@@ -29,7 +28,7 @@ export function useTodoCreate() {
   })
 
   const createTodo = async (creatingTodo: TodoCreateDto) => {
-    await todoSchemaCreate.validate(creatingTodo)
+    await todoCreateSchema.validate(creatingTodo)
     await mutation.mutateAsync(creatingTodo)
   }
 

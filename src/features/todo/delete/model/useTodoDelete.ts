@@ -1,14 +1,12 @@
-import api from '@/shared/api/todos'
-import type { Todo } from '@/shared/api/todos/types'
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { todoKeys } from '../queries'
+import { todoKeys, type Todo, deleteTodo }  from '@/shared/api/todos'
 
 export function useTodoDelete() {
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
     mutationFn: (id: number) => {
-      return api.deleteTodo(id)
+      return deleteTodo(id)
     },
     onSuccess: (_, id: number) => {
       queryClient.setQueryData<Todo[]>(todoKeys.lists(), (old) =>
