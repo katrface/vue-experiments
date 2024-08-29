@@ -3,6 +3,7 @@ import { TodoFormCreate } from '@/features/todo/create';
 import { TodoFormUpdate } from '@/features/todo/update'
 
 import { useRouter } from 'vue-router'
+import BackBtn from './BackBtn.vue';
 
 interface Props {
   id?: number
@@ -18,6 +19,7 @@ const submitted = async () => {
 </script>
 
 <template>
+  <BackBtn />
   <v-sheet
     class="mx-auto"
     width="300"

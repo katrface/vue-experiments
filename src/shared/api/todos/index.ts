@@ -58,7 +58,7 @@ export async function fetchTodoById(id: number) {
 export async function updateTodo(updatingTodo: Todo) {
   try {
     const response = await fetch(`/api/todos/${updatingTodo.id}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },

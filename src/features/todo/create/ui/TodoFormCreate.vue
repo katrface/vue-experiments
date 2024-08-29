@@ -17,10 +17,20 @@ const create = async (creatingTodo: TodoCreateDto) => {
 
 <template>
   <TodoForm
-    v-model:todo="initialTodo"
-    :initial-todo="initialTodo"
+    :initial-values="initialTodo"
     :submitting="isPending"
-    btn-text="Create"
     @submit="create"
-  />
+  >
+    <template #actions="{ meta }">
+      <v-btn
+        :loading="isPending"
+        :disabled="!meta.value.valid || !meta.value.dirty"
+        class="mt-2"
+        type="submit"
+        block
+      >
+        Create
+      </v-btn>
+    </template>
+  </TodoForm>
 </template>

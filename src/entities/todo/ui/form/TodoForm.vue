@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { useTodoForm } from '../../model'
-import { computed } from 'vue'
 import type { TodoForm } from '../../config';
+import { computed } from 'vue';
 
 interface Props {
-  submitting: boolean
+  initialValues: TodoForm
   loading?: boolean
   disabled?: boolean
-  btnText: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -18,23 +17,19 @@ const emits = defineEmits<{
   submit: [todo: TodoForm]
 }>()
 
-const todo = defineModel<TodoForm>('todo', { required: true })
+const initialValues = computed(() => props.initialValues)
 
-const { titleField, descriptionField, form } = useTodoForm(todo)
+const { titleField, descriptionField, form } = useTodoForm(initialValues)
 
 const submit = form.handleSubmit((todo) => {
   emits('submit', todo)
 })
-
-const disabledSubmitBtn = computed(
-  () => props.disabled || !form.meta.value.valid || !form.meta.value.dirty
-)
 </script>
 
 <template>
   <v-form
     fast-fail
-    @submit.prevent
+    @submit="submit"
   >
     <v-text-field
       v-model="titleField.value.value"
@@ -52,15 +47,9 @@ const disabledSubmitBtn = computed(
       label="Description"
     />
 
-    <v-btn
-      :loading="submitting"
-      :disabled="disabledSubmitBtn"
-      class="mt-2"
-      type="submit"
-      block
-      @click="submit"
-    >
-      {{ btnText }}
-    </v-btn>
+    <slot
+      name="actions"
+      :meta="form.meta"
+    />
   </v-form>
 </template>

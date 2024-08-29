@@ -24,11 +24,20 @@ const update = async (updatingTodo: TodoCreateDto) => {
 
 <template>
   <TodoForm
-    v-model:todo="todo"
+    :initial-values="todo"
     :loading="isFetching"
-    :disabled="!isFetched"
-    :submitting="isPending"
-    btn-text="Update"
     @submit="update"
-  />
+  >
+    <template #actions="{ meta }">
+      <v-btn
+        :loading="isPending"
+        :disabled="!isFetched || !meta.value.valid || !meta.value.dirty"
+        class="mt-2"
+        type="submit"
+        block
+      >
+        Update
+      </v-btn>
+    </template>
+  </TodoForm>
 </template>
